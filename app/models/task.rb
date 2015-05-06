@@ -27,4 +27,8 @@ class Task < ActiveRecord::Base
     self.status = "complete"
     save
   end
+
+  def as_json(options={})
+    super(options).merge(due_date: due_date.strftime("%A, %b %d"))
+  end
 end

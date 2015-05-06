@@ -9,9 +9,9 @@
 
 
 <h3>Tasks:</h3>
-<%= link_to "show completed tasks", "#", class: "toggle-tasks" %>
-<%= link_to "show active tasks", "#", class: "toggle-tasks hidden" %>
-<ul>
+<div id="status-toggler"></div>
+
+<ul id="task-list">
 <% @list.tasks.each do |t| %>
   <li class="task <%= "hidden" if t.complete? %>" id="task-<%=t.id%>">
     <p>
@@ -31,3 +31,37 @@
   </li>
 <% end %>
 </ul>
+
+<div style="display: none;" id="tasks-data">
+  <%= @list.tasks.to_json %>
+</div>
+
+<script style="display: none;" id="task-template" type="text/mustache">
+  <li class="task" id="task-{{id}}">
+    <p>
+      <strong>Task: </strong>
+      <span>{{description}}</span>
+      <strong>Due: </strong>
+      <span>{{due_date}}</span>
+      <strong>Status: </strong>
+      <span>{{status}}</span>
+      <span><a href="/lists/{{list_id}}/tasks/{{id}}/edit">edit</a></span>
+      <span>
+          <button class="toggle-task" data-task-id="{{id}}">
+            update
+          </button>
+      </span>
+    </p>
+  </li>
+</script>
+
+<script style="display: none;" id="status-toggle-template" type="text/mustache">
+  <a href="#" class="toggle-tasks">
+    {{#viewingComplete}}
+      show active tasks
+    {{/viewingComplete}}
+    {{^viewingComplete}}
+      show completed tasks
+    {{/viewingComplete}}
+  </a>
+</script>
