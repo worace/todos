@@ -1,3 +1,15 @@
 class List < ActiveRecord::Base
-  default_scope { where(archived: false) }
+
+  def self.active
+    where(archived: false)
+  end
+
+  def self.archived
+    where(archived: true)
+  end
+
+  def archive!
+    self.archived = true
+    save
+  end
 end

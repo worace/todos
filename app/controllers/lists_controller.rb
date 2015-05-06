@@ -1,6 +1,6 @@
 class ListsController < ApplicationController
   def index
-    @lists = List.all
+    @lists = List.active
   end
 
   def show
@@ -31,6 +31,14 @@ class ListsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def archive
+    list = List.find(params[:list_id])
+    if list
+      list.archive!
+    end
+    redirect_to lists_path
   end
 
   private

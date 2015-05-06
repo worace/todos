@@ -34,4 +34,13 @@ class ViewingListsTest < ActionDispatch::IntegrationTest
     assert_equal list_path(List.first), current_path
     assert page.has_content?("new title")
   end
+
+  def test_it_archives_a_list
+    l = List.create(title: "My List")
+    visit list_path(l)
+    click_link_or_button "archive"
+    assert_equal lists_path, current_path
+    refute page.has_content?("My List")
+    assert List.archived.first.archived?
+  end
 end
