@@ -29,7 +29,7 @@ For your final assessment, you'll be building a task management application.
 ### User Interface and Experience
 
 <!--* A user should be able to change the status of a task without reloading the page.-->
-* A user should be able to sort the tasks in a list by title, status, and due date without reloading the page.
+<!--* A user should be able to sort the tasks in a list by title, status, and due date without reloading the page.-->
 * A user should be able to filter the tasks in a list by name without reloading the page.
 * A user should be able to filter the tasks in a list by due date without reloading the page.
 <!--* A user should be able to filter the tasks in a list by status without reloading the page.-->

@@ -11,6 +11,18 @@
 <h3>Tasks:</h3>
 <div id="status-toggler"></div>
 
+<p>
+<strong>Sort By:</strong>
+<a href="#" class="sorter" data-attribute="description">description</a>
+<a href="#" class="sorter" data-attribute="due_date">due date</a>
+</p>
+
+<p>search:</p>
+<form>
+  <input id="search-box">
+  </input>
+</form>
+
 <ul id="task-list">
 <% @list.tasks.each do |t| %>
   <li class="task <%= "hidden" if t.complete? %>" id="task-<%=t.id%>">
