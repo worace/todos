@@ -43,4 +43,14 @@ class ViewingListsTest < ActionDispatch::IntegrationTest
     refute page.has_content?("My List")
     assert List.archived.first.archived?
   end
+
+  def test_it_allows_viewing_archived_lists
+    List.create(title: "My List", archived: true)
+    visit root_path
+    refute page.has_content?("My List")
+    click_link_or_button "archived"
+    assert page.has_content?("My List")
+    assert page.has_link?("active")
+    refute page.has_link?("archived")
+  end
 end

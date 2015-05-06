@@ -1,6 +1,11 @@
 <h1>Your Lists</h1>
 
-<%= link_to "Create list", new_list_path %>
+<p><%= link_to "Create list", new_list_path %></p>
+<% if show_archived? %>
+<p><%= link_to "active", lists_path %></p>
+<% else %>
+<p><%= link_to "archived", lists_path(archived: true) %></p>
+<% end %>
 
 <ul>
 <% @lists.each do |list| %>

@@ -1,6 +1,6 @@
 class ListsController < ApplicationController
   def index
-    @lists = List.active
+    @lists = show_archived? ? List.archived : List.active
   end
 
   def show
@@ -39,6 +39,12 @@ class ListsController < ApplicationController
       list.archive!
     end
     redirect_to lists_path
+  end
+
+
+  helper_method :show_archived?
+  def show_archived?
+    !!params[:archived]
   end
 
   private
