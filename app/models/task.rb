@@ -34,7 +34,7 @@ class Task < ActiveRecord::Base
   end
 
   def email_notifs
-    if match = description.match(cc_regex)
+    if description && match = description.match(cc_regex)
       email = match[1]
       Rails.logger.info("Got a match, sneding an email to #{email}")
       TaskNotificationMailer.cc_email(email, self).deliver
