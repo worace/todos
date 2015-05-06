@@ -4,7 +4,7 @@ class ViewingListsTest < ActionDispatch::IntegrationTest
     assert page.has_content?("Create list")
     click_link_or_button "Create list"
     fill_in "list_title", with: "My List"
-    click_link_or_button "Create"
+    click_link_or_button "Submit"
     assert_equal root_path, current_path
     assert_equal "My List", List.last.title
   end
@@ -21,5 +21,17 @@ class ViewingListsTest < ActionDispatch::IntegrationTest
     visit root_path
     assert page.has_content?("My List")
     refute page.has_content?("Archived")
+  end
+
+  def test_it_renames_a_list
+    List.create(title: "My List")
+    visit root_path
+    click_link_or_button "My List"
+    assert_equal list_path(List.first), current_path
+    click_link_or_button "edit"
+    fill_in "list_title", with: "new title"
+    click_link_or_button "Submit"
+    assert_equal list_path(List.first), current_path
+    assert page.has_content?("new title")
   end
 end

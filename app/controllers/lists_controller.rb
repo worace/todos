@@ -3,6 +3,23 @@ class ListsController < ApplicationController
     @lists = List.all
   end
 
+  def show
+    @list = List.find(params[:id])
+  end
+
+  def edit
+    @list = List.find(params[:id])
+  end
+
+  def update
+    @list = List.find(params[:id])
+    if @list.update_attributes(list_params)
+      redirect_to list_path(@list)
+    else
+      render :edit
+    end
+  end
+
   def new
     @list = List.new
   end
