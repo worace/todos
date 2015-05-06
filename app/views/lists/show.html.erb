@@ -15,12 +15,15 @@
 <h3>Tasks:</h3>
 <ul>
 <% @list.tasks.each do |t| %>
-  <li class="task">
+  <li class="task <%=t.status%>" id="task-<%=t.id%>">
     <p>
       <strong>Task: </strong>
       <span><%= t.description %></span>
       <strong>Due: </strong>
       <span><%= t.due_date.strftime("%A, %b %d") %></span>
+      <strong>Status: </strong>
+      <span><%= t.status %></span>
+      <span><button class="complete-task" data-task-id="<%= t.id %>">Complete</button></span>
     </p>
   </li>
 <% end %>

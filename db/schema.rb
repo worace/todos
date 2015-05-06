@@ -25,11 +25,11 @@ ActiveRecord::Schema.define(version: 20150506003045) do
 
   create_table "tasks", force: :cascade do |t|
     t.integer  "list_id"
-    t.string   "status"
+    t.string   "status",      default: "incomplete"
     t.string   "description"
     t.datetime "due_date"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   add_index "tasks", ["list_id"], name: "index_tasks_on_list_id", using: :btree

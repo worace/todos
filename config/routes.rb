@@ -5,4 +5,5 @@ Rails.application.routes.draw do
     resources :tasks
   end
   resources :archived_lists, only: [:index, :create]
+  resources :completed_tasks, only: [:create]
 end

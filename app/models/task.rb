@@ -5,4 +5,13 @@ class Task < ActiveRecord::Base
   def default_due_date
     self.due_date = 2.weeks.from_now unless self.due_date
   end
+
+  def completed?
+    status == "complete"
+  end
+
+  def complete!
+    self.status = "complete"
+    save
+  end
 end
