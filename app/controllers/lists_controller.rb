@@ -39,6 +39,25 @@ class ListsController < ApplicationController
     redirect_to root_path
   end
 
+  def download
+    list = List.find(params[:id])
+    filename = "todo_list_#{list.id}_#{DateTime.now.to_i}.csv"
+    send_data(list.to_csv,
+      :type => 'text/csv; charset=iso-8859-1; header=present',
+      :disposition => "attachment; filename=#{filename}.csv")
+  end
+
+  def upload
+    list = List.find(params[:id])
+    rows = CSV.read(params[:file].path)
+    headers = rows.shift
+    rows.each do |r|
+      attributes = Hash[headers.zip(r)].except("id", "list_id")
+      list.tasks.create(attributes)
+    end
+    redirect_to list_path(list)
+  end
+
   private
 
   def list_params

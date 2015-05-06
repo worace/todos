@@ -1,3 +1,4 @@
+require "csv"
 class List < ActiveRecord::Base
   has_many :tasks
 
@@ -12,5 +13,14 @@ class List < ActiveRecord::Base
   def archive!
     self.archived = true
     save
+  end
+
+  def to_csv
+    CSV.generate do |csv|
+      csv << Task.column_names
+      tasks.each do |t|
+        csv << t.attributes.values
+      end
+    end
   end
 end
