@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>you got copied on a task nerd</h1>
+    <p>you're being notified because someone /cc'ed you in this task:</p>
+    <p><%= @task.description %></p>
+    <p><%= link_to "check it out", list_task_url(@task.list, @task) %></p>
+  </body>
+</html>
