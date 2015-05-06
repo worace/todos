@@ -19,4 +19,10 @@ class ListTest < ActiveSupport::TestCase
      assert_equal [], List.active
      assert_equal [l], List.archived
    end
+
+   test "has tasks" do
+     l = List.create
+     l.tasks.create(description: "do laundry")
+     assert_equal 1, l.tasks.count
+   end
 end

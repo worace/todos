@@ -1,3 +1,5 @@
+require "test_helper"
+
 class ViewingListsTest < ActionDispatch::IntegrationTest
   def test_it_creates_a_list
     visit root_path
