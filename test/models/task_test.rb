@@ -1,7 +1,11 @@
 require 'test_helper'
 
 class TaskTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+   test "fills duedate with default if not provided" do
+     Timecop.freeze do
+       t = Task.create
+       assert_equal 2.weeks.from_now, t.due_date
+       assert_equal 1.day.from_now, Task.create(due_date: 1.day.from_now).due_date
+     end
+   end
 end
