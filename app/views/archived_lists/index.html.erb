@@ -1,12 +1,13 @@
-<h1>Your Lists</h1>
+<h1>Archived Lists</h1>
 
 <p><%= link_to "Create list", new_list_path %></p>
-<p><%= link_to "archived", archived_lists_path %></p>
+<p><%= link_to "active", lists_path %></p>
 
 <ul>
 <% @lists.each do |list| %>
   <li>
     <p><%= link_to list.title, list_path(list) %></p>
+    <p><%= link_to "delete list", list_path(list), method: "delete" %></p>
   </li>
 <% end %>
 </ul>

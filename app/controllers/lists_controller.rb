@@ -1,6 +1,6 @@
 class ListsController < ApplicationController
   def index
-    @lists = show_archived? ? List.archived : List.active
+    @lists = List.active
   end
 
   def show
@@ -37,20 +37,6 @@ class ListsController < ApplicationController
     list = List.find(params[:id])
     list.destroy! if list
     redirect_to root_path
-  end
-
-  def archive
-    list = List.find(params[:list_id])
-    if list
-      list.archive!
-    end
-    redirect_to lists_path
-  end
-
-
-  helper_method :show_archived?
-  def show_archived?
-    !!params[:archived]
   end
 
   private
