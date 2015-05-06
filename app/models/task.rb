@@ -6,8 +6,21 @@ class Task < ActiveRecord::Base
     self.due_date = 2.weeks.from_now unless self.due_date
   end
 
-  def completed?
+  def complete?
     status == "complete"
+  end
+
+  def incomplete?
+    status == "incomplete"
+  end
+
+  def toggle!
+    if incomplete?
+      self.status = "complete"
+    else
+      self.status = "incomplete"
+    end
+    save
   end
 
   def complete!

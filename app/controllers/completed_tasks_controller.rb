@@ -1,11 +1,11 @@
 class CompletedTasksController < ApplicationController
   def create
     task = Task.find(params[:task_id])
-    task.complete! if task
-    if task && task.completed?
+    if task
+      task.toggle!
       render json: {success: true}
     else
-      render json: {success: false}, status: 422
+      render json: {success: false}, status: 404
     end
   end
 end

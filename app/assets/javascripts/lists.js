@@ -1,10 +1,9 @@
-function removeTask(taskId) {
-  $("#task-"+taskId).removeClass("incomplete");
-  $("#task-"+taskId).addClass("complete");
+function updateTaskView(taskId) {
+  $("#task-"+taskId).toggleClass("hidden");
 }
-function completeTask(taskId) {
+function toggleTask(taskId) {
   $.ajax({url: "/completed_tasks?task_id="+taskId, method: "POST"}).done(function(e) {
-    removeTask(taskId);
+    updateTaskView(taskId);
   });
 }
 
@@ -14,11 +13,20 @@ $(document).ready(function() {
 
 function initListUi() {
   initTaskButtonListener();
+  initTaskToggle();
+}
+
+function initTaskToggle() {
+  $(".toggle-tasks").click(function(e) {
+    e.preventDefault();
+    $(".task").toggleClass("hidden");
+    $(".toggle-tasks").toggleClass("hidden");
+  });
 }
 
 function initTaskButtonListener() {
-  $("button.complete-task").click(function(e) {
+  $("button.toggle-task").click(function(e) {
     var taskId = $(this).data('task-id');
-    completeTask(taskId);
+    toggleTask(taskId);
   });
 }

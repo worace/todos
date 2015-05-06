@@ -8,6 +8,7 @@ gem 'jquery-rails'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
+  gem "launchy"
   gem "connection_pool"
   gem "poltergeist"
   gem "timecop"

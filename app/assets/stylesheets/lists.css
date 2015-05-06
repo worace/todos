@@ -1,6 +1,1 @@
-.task.complete {
-  display: none;
-}
-
-.task.incomplete {
-}
+.hidden { display: none; }

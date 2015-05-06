@@ -9,10 +9,22 @@ class TaskTest < ActiveSupport::TestCase
    end
  end
 
- test "#completed?" do
+ test "#complete?" do
    t = Task.create
-   refute t.completed?
+   refute t.complete?
    t.complete!
-   assert t.completed?
+   assert t.complete?
+ end
+
+ test "toggling" do
+   t = Task.create
+   refute t.complete?
+   assert t.incomplete?
+   t.toggle!
+   assert t.complete?
+   refute t.incomplete?
+   t.toggle!
+   refute t.complete?
+   assert t.incomplete?
  end
 end
