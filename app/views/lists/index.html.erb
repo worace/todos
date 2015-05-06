@@ -9,6 +9,11 @@
 
 <ul>
 <% @lists.each do |list| %>
-  <li><%= link_to list.title, list_path(list) %></li>
+  <li>
+    <p><%= link_to list.title, list_path(list) %></p>
+    <% if show_archived? %>
+      <p><%= link_to "delete list", list_path(list), method: "delete" %></p>
+    <% end %>
+  </li>
 <% end %>
 </ul>

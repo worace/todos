@@ -33,6 +33,12 @@ class ListsController < ApplicationController
     end
   end
 
+  def destroy
+    list = List.find(params[:id])
+    list.destroy! if list
+    redirect_to root_path
+  end
+
   def archive
     list = List.find(params[:list_id])
     if list

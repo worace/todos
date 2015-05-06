@@ -53,4 +53,14 @@ class ViewingListsTest < ActionDispatch::IntegrationTest
     assert page.has_link?("active")
     refute page.has_link?("archived")
   end
+
+  def test_allows_deleting_archived_list
+    List.create(title: "My List", archived: true)
+    visit root_path
+    click_link_or_button "archived"
+    assert page.has_content?("My List")
+    click_link_or_button("delete list")
+    assert_equal root_path, current_path
+    assert_equal 0, List.count
+  end
 end
