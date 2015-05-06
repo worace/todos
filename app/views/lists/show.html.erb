@@ -5,11 +5,7 @@
 
 
 <p><strong>Add Task:</strong></p>
-<%= form_for [@list, Task.new] do |f| %>
-  <%= f.text_field "description" %>
-  <%= f.date_select(:due_date, :start_year => 2015) %>
-  <%= f.submit "Submit" %>
-<% end %>
+<%= render partial: "tasks/form", locals: {list: @list, task: Task.new} %>
 
 
 <h3>Tasks:</h3>
@@ -20,9 +16,11 @@
       <strong>Task: </strong>
       <span><%= t.description %></span>
       <strong>Due: </strong>
+      <% raise t.inspect if t.due_date.nil? %>
       <span><%= t.due_date.strftime("%A, %b %d") %></span>
       <strong>Status: </strong>
       <span><%= t.status %></span>
+      <span><%= link_to "edit", edit_list_task_path(@list, t) %></span>
       <span><button class="complete-task" data-task-id="<%= t.id %>">Complete</button></span>
     </p>
   </li>

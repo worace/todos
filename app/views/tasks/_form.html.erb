@@ -1,0 +1,5 @@
+<%= form_for [list, task] do |f| %>
+  <%= f.text_field "description" %>
+  <%= f.date_select(:due_date, :start_year => 2015) %>
+  <%= f.submit "Submit" %>
+<% end %>
