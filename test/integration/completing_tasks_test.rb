@@ -18,7 +18,7 @@ class CompletingTasksTest < ActionDispatch::IntegrationTest
     l = List.create(title: "My List")
     t = l.tasks.create(description: "do a thing")
     visit list_path(l)
-    click_link_or_button "Complete"
+    click_link_or_button "update"
     assert_equal list_path(l), current_path
     assert t.reload.complete?
     Capybara.current_driver = Capybara.default_driver
@@ -31,7 +31,7 @@ class CompletingTasksTest < ActionDispatch::IntegrationTest
     l.tasks.create(description: "do a thing")
     visit list_path(l)
     assert page.has_selector?("li.hidden", count: 0)
-    click_link_or_button "Complete"
+    click_link_or_button "update"
     assert Task.first.reload.complete?
     assert_equal list_path(l), current_path
     refute page.has_content?("do a thing")

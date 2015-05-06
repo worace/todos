@@ -14,4 +14,3 @@
 //= require jquery_ujs
 //= require underscore
 //= require mustache
-//= require_tree .
