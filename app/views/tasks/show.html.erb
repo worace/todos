@@ -1,0 +1,9 @@
+<h1>here's a task</h1>
+
+<p><%= @task.description %></p>
+
+<p>it's due: </p>
+<p><%= @task.due_date.strftime("%A, %b %d") %></p>
+
+<p>look at some others:</p>
+<p><%= link_to list_path(@task.list) %></p>
